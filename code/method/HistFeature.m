@@ -33,8 +33,8 @@ Hist_all_train=[];
 Hist_all_test=[];
 indextrain = [];
 indextest = [];
-for i=1:Video_train(end,1)
-    for j=1:Video_train(end,2)
+for i=1:max(Video_train(:,1))
+    for j=1:max(Video_train(:,2))
         disp(['processing Test '  num2str(i)])
         ind = find(Video_train(:,1)==i&Video_train(:,2)==j);
         
@@ -46,8 +46,8 @@ for i=1:Video_train(end,1)
     end
 end
 
-for i=1:Video_test(end,1)
-    for j=1:Video_test(end,2)
+for i=1:max(Video_test(:,1))
+    for j=1:max(Video_test(:,2))
         disp(['processing Test '  num2str(i)])
         ind = find(Video_test(:,1)==i&Video_test(:,2)==j);
         if(~isempty(ind))

@@ -1,11 +1,12 @@
+%% ------- CODE DIRECTORIES
 addpath('tools');
 addpath('method');
 addpath('evaluation');
 
-%% ------- Directory Setup
+%% ------- DIRECTORY SETUP
 options.run_name = '\17-06-2015\';
 options.working_path ='../data';
-options.input='../data/input';
+options.input='../data/input/ucf101';
 options.output='../data/output';
 % Utility Path
 options.vl_featPath='thirdparties/vl_feat/vlfeat-0.9.18/toolbox/';
@@ -25,17 +26,24 @@ end
 
 addpath(genpath(options.libsvmPath));
 
-%% ------- Pyramid Setup
+%% ------- PYRAMID SETUP
 options.trackletlength = 20;
 options.pyaramidlevel = 4;
 options.pyaramidnum = {1,2,4,10};
 % kmeans clusters
-options.numClusters = 1000 ;
+options.numClusters = 100 ;
 % dimention reduction
 options.rdim = 100; 
-% the name of set in each category for test
-options.datasetcat = [2,1];
+% features dimention
 options.legcnn = 4096;
 % svm value
 options.CC =[0.1 0.3 0.15 0.18 0.19 0.2 0.5 0.6 1 10 100 1000 10000 100000 1000000];
 options.t = 0;
+
+%% -------- KTH SETUP
+% the name of set in each category for test
+%options.datasetcat = [2,1];
+
+%% -------- UCF101 Setup
+options.ucfClassIndexFile = '../data/ucfTrainTestlist/classInd.mat';
+options.ucfAnnotationFile = '../data/ucfTrainTestlist/annotation.mat';
