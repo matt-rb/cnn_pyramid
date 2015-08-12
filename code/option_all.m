@@ -5,24 +5,24 @@ addpath('evaluation');
 
 %% ------- DIRECTORY SETUP
 options.run_name = '\17-06-2015\';
-options.working_path ='../data';
-options.input='../data/input/ucf101';
-options.output='../data/output';
+options.working_path = fullfile('..','data');
+options.input= fullfile('..','data','input');
+options.output= fullfile('..','data','output');
 % Utility Path
-options.vl_featPath='thirdparties/vl_feat/vlfeat-0.9.18/toolbox/';
-options.libsvmPath='thirdparties/libsvm/matlab/';
-options.pwmetricPath='thirdparties/pwmetric/';
-options.liblinearPatch='thirdparties/liblinear/matlab/';
+options.vl_featPath= fullfile('thirdparties','vl_feat','vlfeat-0.9.18','toolbox');
+options.libsvmPath= fullfile('thirdparties','libsvm','matlab');
+options.pwmetricPath= fullfile('thirdparties','pwmetric');
+options.liblinearPatch=fullfile('thirdparties','liblinear','matlab');
 
-if ispc
-    options.working_path = strrep(options.working_path, '/', '\');
-    options.input = strrep(options.input, '/', '\');
-    options.output = strrep(options.output, '/', '\');
-    options.vl_featPath = strrep(options.vl_featPath, '/', '\');
-    options.libsvmPath = strrep(options.addpath2, '/', '\');
-    options.pwmetricPath = strrep(options.pwmetricPath, '/', '\');
-    options.liblinearPatch = strrep(options.addpath4, '/', '\');
-end
+% if ispc
+%     options.working_path = strrep(options.working_path, '/', '\');
+%     options.input = strrep(options.input, '/', '\');
+%     options.output = strrep(options.output, '/', '\');
+%     options.vl_featPath = strrep(options.vl_featPath, '/', '\');
+%     options.libsvmPath = strrep(options.addpath2, '/', '\');
+%     options.pwmetricPath = strrep(options.pwmetricPath, '/', '\');
+%     options.liblinearPatch = strrep(options.addpath4, '/', '\');
+% end
 
 addpath(genpath(options.libsvmPath));
 
@@ -45,5 +45,5 @@ options.t = 0;
 %options.datasetcat = [2,1];
 
 %% -------- UCF101 Setup
-options.ucfClassIndexFile = '../data/ucfTrainTestlist/classInd.mat';
-options.ucfAnnotationFile = '../data/ucfTrainTestlist/annotation.mat';
+options.ucfClassIndexFile = fullfile('..','data','ucfTrainTestlist','classInd.mat');
+options.ucfAnnotationFile = fullfile('..','data','ucfTrainTestlist','annotation.mat');

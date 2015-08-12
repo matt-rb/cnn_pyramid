@@ -1,7 +1,7 @@
 function [NX_test1,NX_train1,indextest,indextrain] = HistFeature(data_train,data_test,Video_train,Video_test,options)
 % should change some parameter
 numClusters = options.numClusters;
-run([options.vl_featPath 'vl_setup.m']);
+run(fullfile(options.vl_featPath, 'vl_setup.m'));
 addpath(options.pwmetricPath);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%clustering
 M=mean(data_train);
@@ -11,11 +11,6 @@ NX_train=bsxfun(@rdivide,X_train, sqrt(sum(X_train.^2,2)));
 
 X_test=bsxfun(@minus,data_test,M);
 NX_test=bsxfun(@rdivide,X_test, sqrt(sum(X_test.^2,2)));
-
-
-
-
-
 
 % data_train = bsxfun(@rdivide, data_train, eps+ mean(data_train,2));
 %-mean negah dar 
