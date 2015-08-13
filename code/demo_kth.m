@@ -18,13 +18,9 @@ disp('Import/Convert Data ...');
 % Index matrix of test and train samples in following order:
 % [category_idx, sample_idx_in_Category, test(1)/train(0)]
 disp('Make Test/Train index ...');
-test_train_idxs = KthMakeTestTrainIndex( options.kthTestSubjects, indexDataall );
+test_train_idx = KthMakeTestTrainIndex( options.kthTestSubjects, indexDataall );
 
 %% -- Run Spelitting/Train/Test
-for run_no=1:3
-    
-    test_train_idx = test_train_idxs{1,run_no};
-    % Main body of method
-    apply_train_test;
-    
-end
+
+% Main body of method
+apply_train_test;
