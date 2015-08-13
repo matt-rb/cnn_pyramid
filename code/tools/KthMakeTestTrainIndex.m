@@ -4,7 +4,7 @@ function [ test_train_idxs ] = KthMakeTestTrainIndex( test_subjects, indexDataal
     test_train_idxs = zeros(size(indexDataall,1),3);
     
     for i=1:size(indexDataall,1)
-        subject_no = str2num(indexDataall{i}(7:8));
+        subject_no = str2num(indexDataall{i,3}(7:8));
         if (find(test_subjects == subject_no))
             test_train_idxs(i) = [indexDataall(i,1), indexDataall(i,2), 1];
         else
