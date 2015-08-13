@@ -5,10 +5,12 @@ function [ test_train_idxs ] = KthMakeTestTrainIndex( test_subjects, indexDataal
     
     for i=1:size(indexDataall,1)
         subject_no = str2num(indexDataall{i,3}(7:8));
+        test_train_idxs(i,1) = indexDataall{i,1};
+        test_train_idxs(i,2) = indexDataall{i,2};
         if (find(test_subjects == subject_no))
-            test_train_idxs(i) = [indexDataall(i,1), indexDataall(i,2), 1];
+            test_train_idxs(i,3) = 1;
         else
-            test_train_idxs(i) = [indexDataall(i,1), indexDataall(i,2), 0];
+            test_train_idxs(i,3) = 0;
         end
     end
 end

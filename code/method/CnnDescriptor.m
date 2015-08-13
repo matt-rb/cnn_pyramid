@@ -1,7 +1,7 @@
 function [cnn_feature_video] = CnnDescriptor(data,options)
 cnn_feature_video =[];
 %for frmnum =1:options.trackletlength:size(data,2)
-for frmnum =1:(options.trackletlength-19):size(data,2)
+for frmnum =1:(options.trackletlength-options.overlap):size(data,2)
     cnn_feature_pyramid =[];
     %------------------------------------------------
     if((size(data,2)>frmnum+options.trackletlength))

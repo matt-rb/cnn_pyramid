@@ -30,6 +30,7 @@ addpath(genpath(options.libsvmPath));
 options.trackletlength = 20;
 options.pyaramidlevel = 4;
 options.pyaramidnum = {1,2,4,10};
+options.overlap = 1;
 % kmeans clusters
 options.numClusters = 100;
 % dimention reduction
