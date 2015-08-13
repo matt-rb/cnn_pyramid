@@ -31,7 +31,7 @@ options.trackletlength = 20;
 options.pyaramidlevel = 4;
 options.pyaramidnum = {1,2,4,10};
 % kmeans clusters
-options.numClusters = 100 ;
+options.numClusters = 100;
 % dimention reduction
 options.rdim = 100; 
 % features dimention
@@ -41,8 +41,11 @@ options.CC =[0.1 0.3 0.15 0.18 0.19 0.2 0.5 0.6 1 10 100 1000 10000 100000 10000
 options.t = 0;
 
 %% -------- KTH SETUP
-% the name of set in each category for test
-%options.datasetcat = [2,1];
+% the index of subject in each category for test
+options.kthTestSubjects = [2, 3, 5, 6, 7, 8, 9, 10, 22];
+% Annotation and Class Index files
+options.kthClassIndexFile = fullfile('..','data','input','kth','classInd.mat');
+options.kthAnnotationFile = fullfile('..','data','input','kth','annotation.mat');
 
 %% -------- UCF101 Setup
 % Annotation and Class Index files

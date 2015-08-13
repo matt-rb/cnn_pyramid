@@ -4,21 +4,21 @@
 option_all;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
-options.input= fullfile(options.input,'ucf101');
+options.input= fullfile(options.input,'kth');
 disp('Load Data ...');
-load (options.ucfClassIndexFile);
+load (options.kthClassIndexFile);
 
 %% --Import Data
 % Read mat feature files and convert to standard input cell format
 % and Make the index of imported video features to "Dataall"
 disp('Import/Convert Data ...');
-[ Dataall, indexDataall ] = Ucf101Import( options.input, classInd );
+[ Dataall, indexDataall ] = KthImport( options.input, classInd );
 
 %% --Indexing Test/Train Samples
 % Index matrix of test and train samples in following order:
 % [category_idx, sample_idx_in_Category, test(1)/train(0)]
 disp('Make Test/Train index ...');
-test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexDataall );
+test_train_idxs = KthMakeTestTrainIndex( options.kthTestSubjects, indexDataall );
 
 %% -- Run Spelitting/Train/Test
 for run_no=1:3
