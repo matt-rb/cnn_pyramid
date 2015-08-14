@@ -16,7 +16,7 @@ function [ Dataall , IndexDataall ] = YoutubeImport( features_dir, cat_index )
     IndexDataall=cell(1,3);
     video_counter = 1;
     for cat_no=1 : size(cat_index,1)
-        load(fullfile(features_dir,['kth_feats_' cat_index{cat_no,2} '.mat']));
+        load(fullfile(features_dir,['youtube_feats_' cat_index{cat_no,2} '.mat']));
         Dataall{1,cat_no}=all_feats;
         for video_idx=1 : length(all_feats)
             IndexDataall{video_counter,1} = cat_no;

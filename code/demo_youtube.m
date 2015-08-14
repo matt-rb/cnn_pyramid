@@ -1,7 +1,7 @@
 
 
 %% --Setting Configs
-%clear all;
+clear all;
 option_all;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
