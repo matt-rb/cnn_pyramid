@@ -54,6 +54,7 @@ options.ucfClassIndexFile = fullfile('..','data','ucfTrainTestlist','classInd.ma
 options.ucfAnnotationFile = fullfile('..','data','ucfTrainTestlist','annotation.mat');
 
 %% -------- YouTube Setup
+options.youtubeSubjects = 25;
 % directory of feature mat files
 options.youtubeInput = fullfile('/media','matt-rb','MATPASS','datasets','youtube','temp');
 % Annotation and Class Index files

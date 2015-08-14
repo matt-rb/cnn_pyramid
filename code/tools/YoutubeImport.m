@@ -1,5 +1,5 @@
 function [ Dataall , IndexDataall ] = YoutubeImport( features_dir, cat_index )
-%% IMPORTUCF101 get the directory of categories feature files
+%% YoutubeImport get the directory of categories feature files
 % combine all to the standard input format 
 %   input:
 %       - features_dir : string, root directory of mat files(feats)
@@ -12,21 +12,18 @@ function [ Dataall , IndexDataall ] = YoutubeImport( features_dir, cat_index )
 %                   [ Category_id, video_index_in_Category , Video_name ]
 %%
 
-
     Dataall=cell(1,3);
     IndexDataall=cell(1,3);
-    cat_counter = ones(size(cat_index,1),1);
     video_counter = 1;
     for cat_no=1 : size(cat_index,1)
-        load(fullfile(features_dir,['youtube_feats_' cat_index{cat_no,2} '.mat']));
-        cat_name = {feats_names(f_idx).name(3:end-16)};
-        cat_idx = find(cellfun(@(s) ~isempty(strfind(cat_name{1}, s)), cat_index(:,2)));
-        Dataall{1,cat_idx}= [Dataall{1,cat_idx} ; {feat'}];
-        IndexDataall{video_counter,1} = cat_idx;
-        IndexDataall{video_counter,2} = cat_counter(cat_idx);
-        IndexDataall{video_counter,3} = [feats_names(f_idx).name(1:end-4)];
-        video_counter = video_counter +1;
-        cat_counter(cat_idx)= cat_counter(cat_idx)+1;
+        load(fullfile(features_dir,['kth_feats_' cat_index{cat_no,2} '.mat']));
+        Dataall{1,cat_no}=all_feats;
+        for video_idx=1 : length(all_feats)
+            IndexDataall{video_counter,1} = cat_no;
+            IndexDataall{video_counter,2} = video_idx;
+            IndexDataall{video_counter,3} = FList{video_idx};
+            video_counter = video_counter +1;
+        end
     end
 end
 

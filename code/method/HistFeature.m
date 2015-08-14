@@ -12,7 +12,7 @@ addpath(options.pwmetricPath);
 % NX_test=bsxfun(@rdivide,X_test, sqrt(sum(X_test.^2,2)));
 
 NX_train=single(NX_train');
-sprev = rng(0,'v5uniform')
+sprev = rng(0,'v5uniform');
 [centers, assignments] = vl_kmeans(NX_train, numClusters);
 
  NX_test=single(NX_test)';

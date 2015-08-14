@@ -18,12 +18,14 @@ disp('Import/Convert Data ...');
 % Index matrix of test and train samples in following order:
 % [category_idx, sample_idx_in_Category, test(1)/train(0)]
 disp('Make Test/Train index ...');
-test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexDataall );
+test_train_idxs = YoutubeMakeTestTrainIndex( options.youtubeSubjects, indexDataall );
 
 %% -- Run Spelitting/Train/Test
-for run_no=1:3
-    
+results = zeros(options.youtubeSubjects,1);
+for run_no=1:options.youtubeSubjects
+    % Select test/train sets
     test_train_idx = test_train_idxs{1,run_no};
     % Main body of method
     apply_train_test;
+    results(run_no)=acc_orginal;
 end
