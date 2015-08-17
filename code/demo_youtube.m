@@ -20,6 +20,12 @@ disp('Import/Convert Data ...');
 disp('Make Test/Train index ...');
 test_train_idxs = YoutubeMakeTestTrainIndex( options.youtubeSubjects, indexDataall );
 
+
+% --Feature Extraction
+disp('Extract CNN Features ...');
+cnn_feature = ComputeFeatures(Dataall,options);
+
+
 %% -- Run Spelitting/Train/Test
 results = zeros(options.youtubeSubjects,1);
 for run_no=1:options.youtubeSubjects

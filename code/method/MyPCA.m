@@ -7,6 +7,7 @@ X=bsxfun(@minus,X,mean(X));
 %%%%% PCA
 C=X'*X;
 [pc,~]=eigs(C,options.rdim);
+clear C;
 pX=X*pc;
 
-mX=X(:,1:options.rdim);
+%mX=X(:,1:options.rdim);

@@ -1,9 +1,6 @@
 
 %% --Run Test/Train
 
-% --Feature Extraction
-disp('Extract CNN Features ...');
-cnn_feature = ComputeFeatures(Dataall,options);
 
 % --Splitting Test/Train Data
 disp('Spelitting Test/Train Data ...');

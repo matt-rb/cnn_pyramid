@@ -20,6 +20,11 @@ disp('Import/Convert Data ...');
 disp('Make Test/Train index ...');
 test_train_idx = KthMakeTestTrainIndex( options.kthTestSubjects, indexDataall );
 
+
+% --Feature Extraction
+disp('Extract CNN Features ...');
+cnn_feature = ComputeFeatures(Dataall,options);
+
 %% -- Run Spelitting/Train/Test
 
 % Main body of method

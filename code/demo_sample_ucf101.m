@@ -13,6 +13,10 @@ load (options.ucfClassIndexFile);
 disp('Import/Convert Data ...');
 [ Dataall, IndexDataall ] = Ucf101Import( options.input, classInd );
 
+% --Feature Extraction
+disp('Extract CNN Features ...');
+cnn_feature = ComputeFeatures(Dataall,options);
+
 %% --Indexing Test/Train Samples
 % Index matrix of test and train samples in following order:
 % [category_idx, sample_idx_in_Category, test(1)/train(0)]
