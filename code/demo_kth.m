@@ -4,7 +4,7 @@
 option_all;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
-options.input= fullfile(options.input,'kth');
+options.input= fullfile('..','data', 'kth' );
 disp('Load Data ...');
 load (options.kthClassIndexFile);
 
