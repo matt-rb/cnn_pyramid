@@ -2,6 +2,7 @@
 %% --Setting Configs
 %clear all;
 option_all;
+options.overlap = 10;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
 options.input= fullfile(options.input,'ucf101');
@@ -20,11 +21,20 @@ disp('Import/Convert Data ...');
 disp('Make Test/Train index ...');
 test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexDataall );
 
+% --Feature Extraction
+disp('Extract CNN Features ...');
+cnn_feature = ComputeFeatures(Dataall,options);
+clear Dataall
+
+results = zeros(3,1);
+resultsS= zeros(3,1);
 %% -- Run Spelitting/Train/Test
 for run_no=1:3
     
     test_train_idx = test_train_idxs{1,run_no};
     % Main body of method
     apply_train_test;
+    results(run_no)=acc_orginal;
+    resultsS(run_no)=s;
     
 end

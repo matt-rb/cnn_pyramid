@@ -14,7 +14,7 @@ function [ Dataall , IndexDataall ] = Ucf101Import( features_dir, cat_index )
 
 
     vid_feats_names=dir(features_dir);
-    Dataall=cell(1,3);
+    Dataall=cell(1,size(cat_index,1));
     IndexDataall=cell(1,3);
     %Dataall = cell(1,size(cat_index,1));
     cat_counter = ones(size(cat_index,1),1);
@@ -23,13 +23,16 @@ function [ Dataall , IndexDataall ] = Ucf101Import( features_dir, cat_index )
         if(~(strcmpi(vid_feats_names(vid_idx).name,'.') || strcmpi(vid_feats_names(vid_idx).name,'..')) && size(findstr(vid_feats_names(vid_idx).name,'.mat'),1)>0)
             load(fullfile(features_dir,vid_feats_names(vid_idx).name));
             cat_name = {vid_feats_names(vid_idx).name(3:end-16)};
-            cat_idx = find(cellfun(@(s) ~isempty(strfind(cat_name{1}, s)), cat_index(:,2)));
+            cat_idx = find(cellfun(@(s) ~isempty(strmatch(lower(cat_name{1}), lower(s),'exact')), cat_index(:,2)));
+              disp ([num2str(vid_idx) ' ---'  num2str(cat_idx)])
+            disp (vid_feats_names(vid_idx).name)
             Dataall{1,cat_idx}= [Dataall{1,cat_idx} ; {feat'}];
             IndexDataall{video_counter,1} = cat_idx;
             IndexDataall{video_counter,2} = cat_counter(cat_idx);
             IndexDataall{video_counter,3} = [vid_feats_names(vid_idx).name(1:end-4)];
             video_counter = video_counter +1;
             cat_counter(cat_idx)= cat_counter(cat_idx)+1;
+         
         end
     end
 end

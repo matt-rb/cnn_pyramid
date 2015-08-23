@@ -11,8 +11,8 @@ addpath(options.pwmetricPath);
 % X_test=bsxfun(@minus,data_test,M);
 % NX_test=bsxfun(@rdivide,X_test, sqrt(sum(X_test.^2,2)));
 
-NX_train=single(NX_train');
-sprev = rng(0,'v5uniform');
+ NX_train=single(NX_train');
+% sprev = rng(0,'v5uniform')
 [centers, assignments] = vl_kmeans(NX_train, numClusters);
 
  NX_test=single(NX_test)';
@@ -28,7 +28,7 @@ indextrain = [];
 indextest = [];
 for i=1:max(Video_train(:,1))
     for j=1:max(Video_train(:,2))
-        disp(['processing Test '  num2str(i)])
+%         disp(['processing Test '  num2str(i)])
         ind = find(Video_train(:,1)==i&Video_train(:,2)==j);
         
         if(~isempty(ind))
@@ -41,7 +41,7 @@ end
 
 for i=1:max(Video_train(:,1))
     for j=1:max(Video_train(:,2))
-        disp(['processing Test '  num2str(i)])
+%         disp(['processing Test '  num2str(i)])
         ind = find(Video_test(:,1)==i&Video_test(:,2)==j);
         if(~isempty(ind))
             AA=idw1(ind);

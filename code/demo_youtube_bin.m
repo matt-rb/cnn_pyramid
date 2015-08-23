@@ -27,15 +27,8 @@ results = zeros(options.youtubeSubjects,1);
 for run_no=1:options.youtubeSubjects
     % Select test/train sets
     test_train_idx = test_train_idxs{1,run_no};
-    
-    disp('Spelitting Test/Train Data ...');
-    [TestData,TrainData,indTest1,indTrain1] = Splitting(cnn_feature,test_train_idx);
-    disp('Make binary Data ...');
-    [ normalized_fv, mean_data  ] = NormalizeFeatures( TrainData );
-    [ train_bin,itq_rot_mat,pca_mapping ] = train_itq( 20, 5, double(normalized_fv) );
-    [ normalized_fv1, ~  ] = normalize_features( TestData,mean_data);
-    [ test_bin ] = test_itq( double(normalized_fv1), itq_rot_mat, pca_mapping );
-    [trkM] =  BinaryPath(Dataall,train_bin,test_bin,indTrain1,indTest1,options);
+
+[ trkM ] = MakeBinary(Dataall,test_train_idx, options );
     
     % Main body of method
     apply_train_test_bin;

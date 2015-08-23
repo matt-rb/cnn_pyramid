@@ -1,7 +1,8 @@
 
 %% --Setting Configs
-clear all;
+%clear all;
 option_all;
+options.overlap = 19;
 options.numClusters = 1000;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
@@ -22,15 +23,22 @@ disp('Make Test/Train index ...');
 test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexDataall );
 
 % --Feature Extraction
-disp('Extract max Features ...');
-max_feature = ComputeFeatures_max(Dataall,options);
+% disp('Extract CNN Features ...');
+[cnn_feature_size] = ComputeFeaturesForPca(Dataall,options);
 
+% clear Dataall
 
+results = zeros(3,1);
+resultsS= zeros(3,1);
 %% -- Run Spelitting/Train/Test
 for run_no=1:3
     
     test_train_idx = test_train_idxs{1,run_no};
+    [pca_sample] = PcaSampleData(Dataall,test_train_idx,options);
+[v_pca] = PcaData_sample(pca_sample,options);
     % Main body of method
-    apply_train_test_max;
+    Apply_test_train_pca;
+    results(run_no)=acc_orginal;
+%     resultsS(run_no)=s;
     
 end

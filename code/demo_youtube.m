@@ -1,5 +1,3 @@
-
-
 %% --Setting Configs
 clear all;
 option_all;
@@ -28,7 +26,7 @@ cnn_feature = ComputeFeatures(Dataall,options);
 
 %% -- Run Spelitting/Train/Test
 results = zeros(options.youtubeSubjects,1);
-for run_no=1:options.youtubeSubjects
+for run_no=options.youtubeSubjects:-1:1
     % Select test/train sets
     test_train_idx = test_train_idxs{1,run_no};
     % Main body of method

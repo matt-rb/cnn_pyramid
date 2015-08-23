@@ -30,7 +30,7 @@ addpath(genpath(options.libsvmPath));
 options.trackletlength = 20;
 options.pyaramidlevel = 4;
 options.pyaramidnum = {1,2,4,10};
-options.overlap = 5;
+options.overlap = 19;
 % kmeans clusters
 options.numClusters = 4000;
 % dimention reduction
@@ -56,6 +56,7 @@ options.ucfAnnotationFile = fullfile('..','data','ucfTrainTestlist','annotation.
 %% -------- YouTube Setup
 options.youtubeSubjects = 25;
 % directory of feature mat files
-options.youtubeInput = fullfile('/media','matt-rb','MATPASS','datasets','youtube','temp');
+options.youtubeInput = fullfile('..','data','youtube');
 % Annotation and Class Index files
 options.youtubeClassIndexFile = fullfile('..','data','youtube','classInd.mat');
+
