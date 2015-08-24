@@ -8,7 +8,7 @@ for frmnum =1:(options.trackletlength-options.overlap):size(data,2)
     if((size(data,2)>frmnum+options.trackletlength))
         for ii = 1:options.pyaramidlevel
 %             
-             step_pyaramid = options.pyaramidnum{ii};
+             step_pyaramid = options.pyaramidnum(ii);
             trkend = min(size(data,2),frmnum+options.trackletlength);
 %             
              step = (frmnum-1):options.trackletlength/step_pyaramid:trkend;

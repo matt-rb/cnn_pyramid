@@ -3,6 +3,7 @@ clear all;
 option_all;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
+options.demo_alias = 'sample_ucf101';
 options.input= fullfile(options.input,'ucf101sample');
 disp('Load Data ...');
 load (options.ucfClassIndexFile);

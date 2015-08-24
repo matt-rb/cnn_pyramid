@@ -21,7 +21,7 @@ for frmnum =1:length(indx)-1
         
         for ii = 1:options.pyaramidlevel
             
-            step_pyaramid = options.pyaramidnum{ii};
+            step_pyaramid = options.pyaramidnum(ii);
             stp = ((stp1)/step_pyaramid);
             
             step = indxall(indx(frmnum)):stp:indxall(indx(jj)-1);

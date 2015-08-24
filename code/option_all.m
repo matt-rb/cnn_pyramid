@@ -8,28 +8,19 @@ options.run_name = '\17-06-2015\';
 options.working_path = fullfile('..','data');
 options.input= fullfile('..','data','input');
 options.output= fullfile('..','data','output');
+options.report_dir= fullfile('..','reports');
 % Utility Path
 options.vl_featPath= fullfile('thirdparties','vl_feat','vlfeat-0.9.18','toolbox');
 options.libsvmPath= fullfile('thirdparties','libsvm','matlab');
 options.pwmetricPath= fullfile('thirdparties','pwmetric');
 options.liblinearPatch=fullfile('thirdparties','liblinear','matlab');
 
-% if ispc
-%     options.working_path = strrep(options.working_path, '/', '\');
-%     options.input = strrep(options.input, '/', '\');
-%     options.output = strrep(options.output, '/', '\');
-%     options.vl_featPath = strrep(options.vl_featPath, '/', '\');
-%     options.libsvmPath = strrep(options.addpath2, '/', '\');
-%     options.pwmetricPath = strrep(options.pwmetricPath, '/', '\');
-%     options.liblinearPatch = strrep(options.addpath4, '/', '\');
-% end
-
 addpath(genpath(options.libsvmPath));
 
 %% ------- PYRAMID SETUP
 options.trackletlength = 20;
 options.pyaramidlevel = 4;
-options.pyaramidnum = {1,2,4,10};
+options.pyaramidnum = [1,2,4,10];
 options.overlap = 19;
 % kmeans clusters
 options.numClusters = 4000;
