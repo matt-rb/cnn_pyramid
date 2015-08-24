@@ -1,12 +1,15 @@
 
 %% --Setting Configs
 %clear all;
+
+disp('Setting Up...');
 option_all;
 options.overlap = 19;
 options.numClusters = 1000;
-disp('Setting Up...');
+options.demo_alias = 'ucf101_new';
 % Set the root directory of video-feature mat files
 options.input= fullfile(options.input,'ucf101');
+
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
 
@@ -22,27 +25,37 @@ disp('Import/Convert Data ...');
 disp('Make Test/Train index ...');
 test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexDataall );
 
-% --Feature Extraction
-% disp('Extract CNN Features ...');
+%% --Feature Extraction
+disp('Extract CNN Features ...');
 [cnn_feature_size] = ComputeFeaturesForPca(Dataall,options);
 
-% clear Dataall
 
-results = zeros(3,1);
-resultsS= zeros(3,1);
+%% --output results setup
+no_iterations = 3;
+accResults = zeros(no_iterations,1);
+resultsS= zeros(no_iterations,1);
+allKCenters = cell(no_iterations,1);
+allPcaData = cell(no_iterations,1);
+allConf_line = cell(no_iterations,1);
+allConf_lib = cell(no_iterations,1);
+
 %% -- Run Spelitting/Train/Test
-for run_no=1:3
+for run_no=1:no_iterations
     
     test_train_idx = test_train_idxs{1,run_no};
     [pca_sample] = PcaSampleData(Dataall,test_train_idx,options);
     [v_pca] = PcaData_sample(pca_sample,options);
+    
     % Main body of method
     Apply_test_train_pca;
-    results(run_no)=acc_orginal;
-    %     resultsS(run_no)=s;
-    centerall{run_no} = center;
-    datapcaall{run_no} = v_pca;
-    conf_linearall{run_no} = confusion_linear;
-    conf_linall{run_no} = confusion_lib;
-
+    
+    % save results for current iteration
+    accResults(run_no)=acc_orginal;
+    allKCenters{run_no} = center;
+    allPcaData{run_no} = v_pca;
+    allConf_line{run_no} = confusion_linear;
+    allConf_lib{run_no} = confusion_lib;
 end
+
+%% Report
+save_report;

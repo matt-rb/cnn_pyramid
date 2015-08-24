@@ -4,7 +4,7 @@ clear all;
 option_all;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
-options.input= fullfile(options.input,'ucf101');
+options.input= fullfile(options.input,'ucftest2');
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
 
@@ -30,7 +30,7 @@ for run_no=1:3
     
     [ normalized_fv, mean_data  ] = NormalizeFeatures( TrainData );
     [ train_bin,itq_rot_mat,pca_mapping ] = train_itq( 20, 5, double(normalized_fv) );
-    [ normalized_fv1, ~  ] = normalize_features( TestData,mean_data);
+    [ normalized_fv1, ~  ] = NormalizeFeatures( TestData,mean_data);
     [ test_bin ] = test_itq( double(normalized_fv1), itq_rot_mat, pca_mapping );
     [trkM] =  BinaryPath(Dataall,train_bin,test_bin,indTrain1,indTest1,options);
     % Main body of method
