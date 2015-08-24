@@ -14,7 +14,7 @@ disp('Spelitting Test/Train Data ...');
 
 % --Visul word- create hist for train and test
 disp('Creat Histogram ...');
-[test_data,train_data,indTest,indTrain] = HistFeature(trainPool,testPool,indTrain1,indTest1,options);
+[test_data,train_data,indTest,indTrain,centers] = HistFeature(trainPool,testPool,indTrain1,indTest1,options);
 
 % --Create Label 
 disp('Creat Test/Train Labels ...');

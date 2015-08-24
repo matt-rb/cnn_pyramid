@@ -1,4 +1,4 @@
-function [Hist_all_test,Hist_all_train,indextest,indextrain] = HistFeature(data_train,data_test,Video_train,Video_test,options)
+function [Hist_all_test,Hist_all_train,indextest,indextrain,centers] = HistFeature(data_train,data_test,Video_train,Video_test,options)
 % should change some parameter
 numClusters = options.numClusters;
 run(fullfile(options.vl_featPath, 'vl_setup.m'));

@@ -1,6 +1,7 @@
 %% --Setting Configs
 clear all;
 option_all;
+options.numClusters = 40;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
 options.demo_alias = 'sample_ucf101';
@@ -34,3 +35,4 @@ test_train_idx = [3 1 0;...
 %% -- Run Spelitting/Train/Test
 % Main body of method
 apply_train_test;
+save_report;
