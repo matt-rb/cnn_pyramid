@@ -3,6 +3,7 @@ legcnn = options.legcnn;
 numf = size(pca_sample,2)/legcnn;
 disp('Compute PCA for sampled data');
 dispstat ('','init');
+v_pca = cell(1,numf);
 for jj =1:numf
     [~,~,V] = fsvd(pca_sample(:,((jj-1)*legcnn+1):(jj*legcnn)), options.rdim);
     v_pca{jj} = V;

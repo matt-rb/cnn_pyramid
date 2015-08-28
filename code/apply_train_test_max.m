@@ -4,9 +4,12 @@
 disp('Spelitting Test/Train Data ...');
 [TestData,TrainData,indTest1,indTrain1] = Splitting(max_feature,test_train_idx);
 
-% --Visul word- create hist for train and test
-disp('Creat Histogram ...');
-% [test_data,train_data,indTest,indTrain] = HistFeature(TrainData,TestData,indTrain1,indTest1,options);
+% --PCA
+if apply_PCA        
+    disp('Apply PCA ...');
+    [TrainData_pca,TestData_pca] = PcaData(TrainData,TestData,options);
+end
+
 
 % --Create Label 
 disp('Creat Test/Train Labels ...');
