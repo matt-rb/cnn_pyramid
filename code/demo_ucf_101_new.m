@@ -2,19 +2,28 @@
 %% --Setting Configs
 clear all;
 clc;
-options.no_class = 4;
-% options.mode param for ComputeFeaturesForPca
-% to compute CNN descriptor use 'cnn'
-% to compute FTT descriptor use 'ftt'
-options.mode = 'fft';
+
 disp('Setting Up...');
 option_all;
 diary on;
 options.overlap = 10;
 options.numClusters =1000;
-options.demo_alias = 'ucf101_selected4Cats_fft_alex';
+% options.mode param for ComputeFeaturesForPca
+% to compute CNN descriptor use 'cnn'
+% to compute FTT descriptor use 'ftt'
+options.mode = 'cnn';
+% options.pyramidType param for ComputeFeaturesForPca
+% to compute subtracted CNN-pyramid descriptor use 'sub'
+% to compute max CNN-pyramid descriptor use 'max'
+options.pyramidType = 'sub';
+options.no_class = 10;
+options.demo_alias = 'ucf101_selected_10Categories';
 % Set the root directory of video-feature mat files
-options.input= fullfile(options.input,'UCF4Cats');
+options.input= fullfile(options.input,'ucflimited');
+%% PCA TYPE
+% 'fsvd' : to apply random pca with fsvd
+% 'npca' : to apply normal pca
+options.pcaType = 'npca';
 
 disp('Load Data ...');
 load(options.ucfClassIndexFile);
@@ -26,7 +35,7 @@ end
 % Read mat feature files and convert to standard input cell format
 % and Make the index of imported video features to "Dataall"
 disp('Import/Convert Data ...');
-[ Dataall, indexDataall ] = UcfImportTest( options.input, classInd );
+[ Dataall, indexDataall ] = Ucf101Import( options.input, classInd );
 
 %% --Indexing Test/Train Samples
 % Index matrix of test and train samples in following order:

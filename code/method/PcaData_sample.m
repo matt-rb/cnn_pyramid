@@ -5,8 +5,14 @@ disp('Compute PCA for sampled data');
 dispstat ('','init');
 v_pca = cell(1,numf);
 for jj =1:numf
-    [~,~,V] = fsvd(pca_sample(:,((jj-1)*legcnn+1):(jj*legcnn)), options.rdim);
+    if strcmp(options.pcaType,'fsvd')
+        [~,~,V] = fsvd(pca_sample(:,((jj-1)*legcnn+1):(jj*legcnn)), options.rdim,2,true);
+        dispstat (['PCA-fsvd sample [' num2str(jj) ']/' num2str(numf) ]);
+    else
+        [~,V] = MyPCA(pca_sample(:,((jj-1)*legcnn+1):(jj*legcnn)),options);
+        dispstat (['PCA-npca sample [' num2str(jj) ']/' num2str(numf) ]);
+    end
     v_pca{jj} = V;
-    dispstat (['PCA sample [' num2str(jj) ']/' num2str(numf) ]);
+    
 end
 

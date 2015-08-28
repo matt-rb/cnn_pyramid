@@ -6,7 +6,7 @@ dispstat ('','init');
 for categorynum =1:length(Dataall)%-------------------------extract feature for whole of dataset
     for vidnum = 1: size(Dataall{categorynum},1)%-------------------------extract feature for each video
         data = Dataall{categorynum}{vidnum};
-        if mode == 'cnn'
+        if strcmp(mode, 'cnn')
             [cnn_feature_video] = CnnDescriptor(data,options);
         else
             [cnn_feature_video] = CnnDescriptor_FFT(data,options);
