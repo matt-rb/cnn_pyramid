@@ -3,6 +3,16 @@ function [cnn_feature_size] = ComputeFeaturesForPca(Dataall,options,mode)
 if ~exist (fullfile(options.output,options.run_name),'dir')
     mkdir(options.output,options.run_name);
 end
+
+if strcmp(mode,'cnn')
+    if ~isfield(options,'pyramidType')
+        options.pyramidType = 'sub';
+    end
+    disp(['extract cnn-' options.pyramidType])
+else
+    disp(['extract ' mode])
+end
+
 dispstat ('','init');
 for categorynum =1:length(Dataall)%-------------------------extract feature for whole of dataset
     for vidnum = 1: size(Dataall{categorynum},1)%-------------------------extract feature for each video
