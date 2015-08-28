@@ -18,7 +18,10 @@ options.input= fullfile(options.input,'UCF4Cats');
 
 disp('Load Data ...');
 load(options.ucfClassIndexFile);
-classInd(options.no_class+1:end,:) = [];
+if options.no_class > 0
+    classInd(options.no_class+1:end,:) = [];
+end
+
 %% --Import Data
 % Read mat feature files and convert to standard input cell format
 % and Make the index of imported video features to "Dataall"

@@ -12,4 +12,5 @@ save (fullfile(main_root,'results.mat') , 'options', 'accResults', ...
       'allKCenters', 'allPcaData', 'allConf_line', 'allConf_lib');
   
  diary( fullfile(main_root,'command_window.txt'));
+ diary off;
 

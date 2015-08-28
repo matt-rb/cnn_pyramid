@@ -1,19 +1,25 @@
 
 %% --Setting Configs
 clear all;
-option_all;
-options.numClusters = 1000;
+clc;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
-options.input= fullfile(options.input,'ucf101');
-disp('Setting Up...');
 option_all;
+options.input= fullfile(options.input,'ucflimited');
 diary on;
-options.demo_alias = 'ucf101_max';
-apply_PCA = false;
+options.no_class = 10;
+options.demo_alias = 'ucf101_max_10Categories';
+options.apply_PCA = 1;
+%% PCA TYPE
+% 'fsvd' : to apply random pca with fsvd
+% 'pca' : to apply normal pca
+options.pcaType = 'fsvd';
 
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
+if options.no_class > 0
+    classInd(options.no_class+1:end,:) = [];
+end
 
 %% --Import Data
 % Read mat feature files and convert to standard input cell format
@@ -45,14 +51,12 @@ allConf_lib = cell(no_iterations,1);
 for run_no=1:3
     
     test_train_idx = test_train_idxs{1,run_no};
-    
+    test_train_idx = (test_train_idx(find(test_train_idx(:,1)>0),:));
     % Main body of method
     apply_train_test_max;
     
     % save results for current iteration
     accResults(run_no)=acc_orginal;
-    allKCenters{run_no} = center;
-    allPcaData{run_no} = v_pca;
     allConf_line{run_no} = confusion_linear;
     
 end
