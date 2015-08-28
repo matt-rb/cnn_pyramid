@@ -1,4 +1,5 @@
 function [classifiers_linear] = Traing1(train_data,train_label,options)
+dispstat('','init');
 %--classifiers{length(CC)}{category}% for k=1:length(CC)
 %     disp(['processing k '  num2str(k)])
 %     C=CC(k);
@@ -9,7 +10,7 @@ function [classifiers_linear] = Traing1(train_data,train_label,options)
 
 CC = options.CC;
 for k=1:length(CC)
-    disp(['processing k '  num2str(k)])
+    dispstat(['processing k '  num2str(k)])
     C=CC(k);
     classifiers_linear{k} = one_vs_all(train_data',train_label',C ,2, options);
 end

@@ -7,7 +7,6 @@ uLabel=unique(train_label);
 num_of_cat=length(uLabel);
 
 for i=1:num_of_cat
-    i
         pos_train_idx=find(train_label==uLabel(i));
         neg_train_idx=find(train_label~=uLabel(i));
 %            num_of_negative_train=255;

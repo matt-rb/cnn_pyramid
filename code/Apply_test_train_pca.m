@@ -14,7 +14,7 @@ disp('Spelitting Test/Train Data ...');
 
 % --Visul word- create hist for train and test
 disp('Creat Histogram ...');
-[test_data,train_data,indTest,indTrain,centers] = HistFeature(trainPool,testPool,indTrain1,indTest1,options);
+[test_data,train_data,indTest,indTrain,center] = HistFeature(trainPool,testPool,indTrain1,indTest1,options);
 
 % --Create Label 
 disp('Creat Test/Train Labels ...');
@@ -27,9 +27,9 @@ disp('Training ...');
 % --Testing
 disp('Testing ...');
 % [acc_lib,acc_linear,acc_orginal,confidence_lib,confidence_linear] = Testing(test_data,test_label,classifiers,classifiers_linear,options);
-[acc_orginal] = Testing1(test_data,test_label,classifiers_linear,options);
+[acc_orginal,confusion_linear] = Testing1(test_data,test_label,classifiers_linear,options);
 % --Evaluation
 disp(['Accuracy: ' num2str(acc_orginal)]);
-create_confusion_matrix;
+% create_confusion_matrix;
 
 disp('Finito!');

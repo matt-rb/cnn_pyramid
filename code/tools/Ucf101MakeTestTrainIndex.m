@@ -1,6 +1,7 @@
 function [ test_train_idxs ] = Ucf101MakeTestTrainIndex( annotation_file, indexDataall )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
+    dispstat ('','init');
     load (annotation_file);
     test_train_idxs = cell(1,3);
     test_train_idx = zeros(length(trainlist01)+length(testlist01),3);
@@ -11,6 +12,7 @@ function [ test_train_idxs ] = Ucf101MakeTestTrainIndex( annotation_file, indexD
         if size(sample_idx,1) > 0
          test_train_idx(i,:) = [indexDataall{sample_idx(1),1},indexDataall{sample_idx(1),2},0];
         end
+        dispstat (['Trainset [1] sample: [' num2str(i) ']/' num2str(length(trainlist01))]);
     end
     offset = length(trainlist01);
     
@@ -21,6 +23,7 @@ function [ test_train_idxs ] = Ucf101MakeTestTrainIndex( annotation_file, indexD
         if size(sample_idx,1) > 0
             test_train_idx(offset+i,:) = [indexDataall{sample_idx(1),1},indexDataall{sample_idx(1),2},1];
         end
+        dispstat (['Testset [1] sample: [' num2str(i) ']/' num2str(length(testlist01))]);
     end
     
     test_train_idxs{1,1} = test_train_idx;
@@ -33,6 +36,7 @@ function [ test_train_idxs ] = Ucf101MakeTestTrainIndex( annotation_file, indexD
         if size(sample_idx,1) > 0
          test_train_idx(i,:) = [indexDataall{sample_idx(1),1},indexDataall{sample_idx(1),2},0];
         end
+        dispstat (['Trainset [2] sample: [' num2str(i) ']/' num2str(length(trainlist02))]);
     end
     offset = length(trainlist02);
     
@@ -43,6 +47,7 @@ function [ test_train_idxs ] = Ucf101MakeTestTrainIndex( annotation_file, indexD
         if size(sample_idx,1) > 0
             test_train_idx(offset+i,:) = [indexDataall{sample_idx(1),1},indexDataall{sample_idx(1),2},1];
         end
+        dispstat (['Testset [2] sample: [' num2str(i) ']/' num2str(length(testlist02))]);
     end
     
     test_train_idxs{1,2} = test_train_idx;
@@ -55,6 +60,7 @@ function [ test_train_idxs ] = Ucf101MakeTestTrainIndex( annotation_file, indexD
         if size(sample_idx,1) > 0
          test_train_idx(i,:) = [indexDataall{sample_idx(1),1},indexDataall{sample_idx(1),2},0];
         end
+        dispstat (['Trainset [3] sample: [' num2str(i) ']/' num2str(length(trainlist03))]);
     end
     offset = length(trainlist03);
     
@@ -65,6 +71,7 @@ function [ test_train_idxs ] = Ucf101MakeTestTrainIndex( annotation_file, indexD
         if size(sample_idx,1) > 0
             test_train_idx(offset+i,:) = [indexDataall{sample_idx(1),1},indexDataall{sample_idx(1),2},1];
         end
+        dispstat (['Testset [3] sample: [' num2str(i) ']/' num2str(length(testlist03))]);
     end
     
     test_train_idxs{1,3} = test_train_idx;

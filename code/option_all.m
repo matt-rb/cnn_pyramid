@@ -20,6 +20,7 @@ addpath(genpath(options.libsvmPath));
 %% ------- PYRAMID SETUP
 options.trackletlength = 20;
 options.pyaramidlevel = 4;
+options.fftlevel = 9;
 options.pyaramidnum = [1,2,4,10];
 options.overlap = 19;
 % kmeans clusters

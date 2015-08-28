@@ -3,6 +3,7 @@ function [Hist_all_test,Hist_all_train,indextest,indextrain,centers] = HistFeatu
 numClusters = options.numClusters;
 run(fullfile(options.vl_featPath, 'vl_setup.m'));
 addpath(options.pwmetricPath);
+dispstat ('','init');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%clustering
  [NX_test,NX_train] = Norm2Normalization(data_train,data_test);
 % M=mean(data_train);
@@ -29,8 +30,8 @@ indextest = [];
 for i=1:max(Video_train(:,1))
     for j=1:max(Video_train(:,2))
 %         disp(['processing Test '  num2str(i)])
+        dispstat (['processing Hist-Train: [' num2str(i) '] [' num2str(j) ']' ]);
         ind = find(Video_train(:,1)==i&Video_train(:,2)==j);
-        
         if(~isempty(ind))
             AA=assignments1(ind);
             Hist_all_train(end+1,:) = histc(AA,1:numClusters);
@@ -42,6 +43,7 @@ end
 for i=1:max(Video_train(:,1))
     for j=1:max(Video_train(:,2))
 %         disp(['processing Test '  num2str(i)])
+        dispstat (['processing Hist-Train: [' num2str(i) '] [' num2str(j) ']' ]);
         ind = find(Video_test(:,1)==i&Video_test(:,2)==j);
         if(~isempty(ind))
             AA=idw1(ind);

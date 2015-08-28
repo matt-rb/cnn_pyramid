@@ -33,7 +33,7 @@ end
 
 %---
 
-for k=1:length(CC)
+for k=1:3%length(CC)
     
 [acc2,confidence_linear3,~] =CategorizationRateOrginal(classifiers_linear{k}, test_data', test_label'); 
 accc(k) = acc2;

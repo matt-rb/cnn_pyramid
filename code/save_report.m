@@ -10,4 +10,6 @@ end
 struct2File( options, fullfile(main_root,'options.txt'), 'sort', false ,'delimiter',' : ');
 save (fullfile(main_root,'results.mat') , 'options', 'accResults', ...
       'allKCenters', 'allPcaData', 'allConf_line', 'allConf_lib');
+  
+ diary( fullfile(main_root,'command_window.txt'));
 
