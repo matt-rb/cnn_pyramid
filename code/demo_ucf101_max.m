@@ -12,8 +12,8 @@ options.demo_alias = 'ucf101_max_10Categories';
 options.apply_PCA = 1;
 %% PCA TYPE
 % 'fsvd' : to apply random pca with fsvd
-% 'pca' : to apply normal pca
-options.pcaType = 'fsvd';
+% 'npca' : to apply normal pca
+options.pcaType = 'npca';
 
 disp('Load Data ...');
 load (options.ucfClassIndexFile);

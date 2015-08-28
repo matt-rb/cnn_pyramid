@@ -9,9 +9,13 @@ for jj =1:numf
 %     TrainData1 = TrainData(:,((jj-1)*legcnn+1):(jj*legcnn));
       TrainData1 = TrainData(:,1:legcnn);
       TrainData(:,1:legcnn)=[];
-    i=2;
-    [feature_pca,~,V] = fsvd(TrainData1, options.rdim,i,true);
-    trainpca1 = V;
+        if options.pcaType == 'fsvd'
+            i=2;
+            [feature_pca,~,V] = fsvd(TrainData1, options.rdim,i,true);
+            trainpca1 = V;
+        else
+            [feature_pca,trainpca1] = MyPCA(TrainData1,options);
+        end
     
 % %     %A2 = U * S * V';
 % %     %display(['FSVD POWER Error: ' num2str(compute_error(TrainData1,A2))])

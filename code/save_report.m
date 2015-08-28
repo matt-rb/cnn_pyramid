@@ -13,4 +13,5 @@ save (fullfile(main_root,'results.mat') , 'options', 'accResults', ...
   
  diary( fullfile(main_root,'command_window.txt'));
  diary off;
+ diary('tmp.txt');
 
