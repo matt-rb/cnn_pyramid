@@ -2,6 +2,10 @@ function [v_pca] = PcaData_sample(pca_sample,options)
 legcnn = options.legcnn;
 numf = size(pca_sample,2)/legcnn;
 disp('Compute PCA for sampled data');
+if ~isfield(options,'pcaType')
+    options.pcaType='fsvd';
+end
+
 dispstat ('','init');
 v_pca = cell(1,numf);
 for jj =1:numf

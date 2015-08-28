@@ -6,6 +6,8 @@ clc;
 disp('Setting Up...');
 option_all;
 diary on;
+
+%% Expriment Exclusive Setup
 options.overlap = 10;
 options.numClusters =1000;
 % options.mode param for ComputeFeaturesForPca
@@ -16,11 +18,11 @@ options.mode = 'cnn';
 % to compute subtracted CNN-pyramid descriptor use 'sub'
 % to compute max CNN-pyramid descriptor use 'max'
 options.pyramidType = 'sub';
-options.no_class = 10;
 options.demo_alias = 'ucf101_selected_10Categories';
+options.no_class = 10; % number of selected categories ('0' for select all)
 % Set the root directory of video-feature mat files
 options.input= fullfile(options.input,'ucflimited');
-%% PCA TYPE
+% options.pcaType for applying PCA
 % 'fsvd' : to apply random pca with fsvd
 % 'npca' : to apply normal pca
 options.pcaType = 'npca';

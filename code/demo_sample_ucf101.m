@@ -1,10 +1,13 @@
 %% --Setting Configs
 clear all;
+clc;
 option_all;
 options.numClusters = 40;
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
 options.demo_alias = 'sample_ucf101';
+options.mode = 'cnn';
+options.pyramidType = 'max';
 options.input= fullfile(options.input,'ucf101sample');
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
@@ -17,7 +20,8 @@ disp('Import/Convert Data ...');
 
 % --Feature Extraction
 disp('Extract CNN Features ...');
-cnn_feature = ComputeFeatures(Dataall,options);
+%cnn_feature = ComputeFeatures(Dataall,options);
+[cnn_feature_size] = ComputeFeaturesForPca(Dataall,options,options.mode);
 
 %% --Indexing Test/Train Samples
 % Index matrix of test and train samples in following order:
@@ -33,6 +37,8 @@ test_train_idx = [3 1 0;...
                    3 3 1];
 
 %% -- Run Spelitting/Train/Test
+[pca_sample] = PcaSampleData(Dataall,test_train_idx,options);
+[v_pca] = PcaData_sample(pca_sample,options);
 % Main body of method
 apply_train_test;
 save_report;
