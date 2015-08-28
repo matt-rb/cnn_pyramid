@@ -12,7 +12,10 @@ fprintf('PCA done in %f min\n',ff/60);
 disp('Spelitting Test/Train Data ...');
 % [TestData,TrainData,indTest1,indTrain1] = Splitting(cnn_feature,test_train_idx);
 % [TestData,TrainData,indTest1,indTrain1] = Splitting_ComputeCnn(Dataall,test_train_idx,options);
+tic
 [testPool,trainPool,indTest1,indTrain1] = Splitting_Cnn(test_train_idx,cnn_feature_size,options);
+ff = toc;
+fprintf('Spelitting done in %f min\n',ff/60);
 
 % --Visul word- create hist for train and test
 disp('Creat Histogram ...');

@@ -47,8 +47,10 @@ test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexData
 
 %% --Feature Extraction
 disp('Extract CNN Features ...');
+tic
 [cnn_feature_size] = ComputeFeaturesForPca(Dataall,options,options.mode);
-
+ff = toc;
+fprintf('Extract Features done in %f min\n',ff/60);
 
 %% --output results setup
 no_iterations = 3;
@@ -62,11 +64,13 @@ allConf_lib = cell(no_iterations,1);
 %% -- Run Spelitting/Train/Test
 for run_no=1:no_iterations
     
+    disp('Sampling PCA...');
     test_train_idx = test_train_idxs{1,run_no};
     test_train_idx = (test_train_idx(find(test_train_idx(:,1)>0),:));
     [pca_sample] = PcaSampleData(Dataall,test_train_idx,options);
     [v_pca] = PcaData_sample(pca_sample,options);
-    
+    ff = toc;
+    fprintf('Sampling PCA done in %f min\n',ff/60);
     % Main body of method
     Apply_test_train_pca;
     
