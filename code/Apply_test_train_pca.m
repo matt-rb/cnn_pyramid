@@ -6,6 +6,8 @@ disp('Apply PCA ...');
 tic
 PcaAll(Dataall,v_pca,options);
 ff = toc;
+fprintf('PCA done in %f min\n',ff/60);
+
 % --Splitting Test/Train Data
 disp('Spelitting Test/Train Data ...');
 % [TestData,TrainData,indTest1,indTrain1] = Splitting(cnn_feature,test_train_idx);

@@ -8,6 +8,7 @@ disp('Setting Up...');
 options.demo_alias = 'sample_ucf101';
 options.mode = 'cnn';
 options.pyramidType = 'max';
+options.pcaType='npca';
 options.input= fullfile(options.input,'ucf101sample');
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
