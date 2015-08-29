@@ -1,5 +1,8 @@
 function [cnn_feature_video] = CnnDescriptor_bin(data,trkM2,options)
 cnn_feature_video =[];
+if ~isfield(options,'pyramidType')
+    options.pyramidType = 'sub';
+end
 %for frmnum =1:options.trackletlength:size(data,2)
 indx = find(trkM2>0);
 indxall = [1:length(trkM2)];
@@ -28,7 +31,16 @@ for frmnum =1:length(indx)-1
             
             for pnum =1 :length(step)-1
                 cnn_feature_pyramid1=[];
-                cnn_feature_pyramid1= data(:,floor(step(pnum))) - data(:,floor(step(pnum+1)));
+                switch options.pyramidType
+                    case 'sub'
+                        cnn_feature_pyramid1= data(:,floor(step(pnum))) - data(:,floor(step(pnum+1)));
+                    case 'max'
+                        cnn_feature_pyramid1= max(data(:,floor(step(pnum))) , data(:,floor(step(pnum+1))));
+                    case 'sum'
+                        cnn_feature_pyramid1= data(:,floor(step(pnum))) + data(:,floor(step(pnum+1)));
+                    case 'avg'
+                        cnn_feature_pyramid1= mean(data(:,floor(step(pnum)):floor(step(pnum+1))),2); 
+                end
                 cnn_feature_pyramid = [cnn_feature_pyramid,cnn_feature_pyramid1'];
             end
             

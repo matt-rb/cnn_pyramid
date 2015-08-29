@@ -31,7 +31,7 @@ for jj =1:numf
 % %     %disp(toc);
 % %     %display(['MyPCA2 Error: ' num2str(compute_error(TrainData1,(signals*PC')))])
 % %     %clear signals PC V;
-    dispstat (['Appy PCA Trainset sample [' num2str(jj) ']/' num2str(numf) ]);
+    dispstat (['Appy PCA Trainset level [' num2str(jj) ']/' num2str(numf) ']']);
     trainpca{jj} = trainpca1;
     TrainData_pca(1:end,((jj-1)*options.rdim)+1:((jj)*options.rdim))= feature_pca;
 end
@@ -42,6 +42,6 @@ for jj =1:numf
       TestData1 = TestData(:,1:legcnn);
       TestData(:,1:legcnn)=[];
     testpca = trainpca{jj};
-    dispstat (['Appy PCA Testset sample [' num2str(jj) ']/' num2str(numf) ]);
+    dispstat (['Appy PCA Testset level [' num2str(jj) ']/' num2str(numf) ']' ]);
      TestData_pca(1:end,((jj-1)*options.rdim)+1:((jj)*options.rdim))= TestData1*testpca;
 end
