@@ -9,9 +9,10 @@ end
 
 disp('Setting Up...');
 diary on;
-report_end = 'cnn_max_fsvd';
+
 %% Expriment Exclusive Setup
-options.overlap = 19;
+options.overlap = 10;
+options.trackletlength = 20;
 options.numClusters =4000;
 % options.mode param for ComputeFeaturesForPca
 % to compute CNN descriptor use 'cnn'
@@ -20,7 +21,9 @@ options.mode = 'cnn';
 % options.pyramidType param for ComputeFeaturesForPca
 % to compute subtracted CNN-pyramid descriptor use 'sub'
 % to compute max CNN-pyramid descriptor use 'max'
-options.pyramidType = 'max';
+% to compute mean CNN-pyramid descriptor use 'avg'
+% to compute sum CNN-pyramid descriptor use 'sum'
+options.pyramidType = 'avg';
 options.demo_alias = 'ucf101_selected_10Categories';
 options.no_class = 10; % number of selected categories ('0' for select all)
 % Set the root directory of video-feature mat files
@@ -30,6 +33,7 @@ options.input= fullfile(options.input,'ucflimited');
 % 'npca' : to apply normal pca
 options.pcaType = 'fsvd';
 
+report_end = [options.mode '_' options.pyramidType '_' options.pcaType];
 disp('Load Data ...');
 load(options.ucfClassIndexFile);
 if options.no_class > 0
@@ -51,11 +55,12 @@ disp('Make Test/Train index ...');
 test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexDataall );
 
 %% --Feature Extraction
-disp('Extract CNN Features ...');
+disp('Extract Features and PCA sampling...');
 tic
-[cnn_feature_size] = ComputeFeaturesForPca(Dataall,options,options.mode);
+% [cnn_feature_size] = ComputeFeaturesForPca(Dataall,options,options.mode);
+[cnn_feature_size,pca_sample_all] = ComputeFeaturesForPca_withSampling(Dataall,test_train_idxs,options,options.mode);
 ff = toc;
-fprintf('Extract Features done in %f min\n',ff/60);
+fprintf('Extract Features and PCA sampling done in %f min\n',ff/60);
 
 %% --output results setup
 no_iterations = 3;
@@ -69,13 +74,14 @@ allConf_lib = cell(no_iterations,1);
 %% -- Run Spelitting/Train/Test
 for run_no=1:no_iterations
     
-    disp('Sampling PCA...');
+    disp('Compute PCA data...');
+    tic;
     test_train_idx = test_train_idxs{1,run_no};
     test_train_idx = (test_train_idx((test_train_idx(:,1)>0),:));
-    [pca_sample] = PcaSampleData(Dataall,test_train_idx,options);
-    [v_pca] = PcaData_sample(pca_sample,options);
+%     [pca_sample] = PcaSampleData(Dataall,test_train_idx,options);
+    [v_pca] = PcaData_sample(pca_sample_all{run_no},options);
     ff = toc;
-    fprintf('Sampling PCA done in %f min\n',ff/60);
+    fprintf('Compute PCA data done in %f min\n',ff/60);
     % Main body of method
     Apply_test_train_pca;
     

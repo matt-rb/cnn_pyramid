@@ -17,10 +17,15 @@ for frmnum =1:(options.trackletlength-options.overlap):size(data,2)
             
             for jj =1 :length(step)-1
                 cnn_feature_pyramid1=[];
-                if strcmp(options.pyramidType,'sub')
-                    cnn_feature_pyramid1= data(:,step(jj)+1) - data(:,step(jj+1));
-                else
-                    cnn_feature_pyramid1= max(data(:,step(jj)+1) , data(:,step(jj+1)));
+                switch options.pyramidType
+                    case 'sub'
+                        cnn_feature_pyramid1= data(:,step(jj)+1) - data(:,step(jj+1));
+                    case 'max'
+                        cnn_feature_pyramid1= max(data(:,step(jj)+1) , data(:,step(jj+1)));
+                    case 'sum'
+                        cnn_feature_pyramid1= data(:,step(jj)+1) + data(:,step(jj+1)); 
+                    case 'avg'
+                        cnn_feature_pyramid1= mean(data(:,(step(jj)+1):step(jj+1)),2); 
                 end
 %                 cnn_feature_pyramid1= sqrt(abs((data(:,step(jj)+1) - data(:,step(jj+1)))))/(norm((data(:,step(jj)+1) - data(:,step(jj+1))),2));
                 cnn_feature_pyramid = [cnn_feature_pyramid,cnn_feature_pyramid1'];
