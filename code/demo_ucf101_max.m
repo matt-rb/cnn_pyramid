@@ -2,6 +2,7 @@
 %% --Setting Configs
 clear all;
 clc;
+
 disp('Setting Up...');
 % Set the root directory of video-feature mat files
 option_all;
@@ -9,12 +10,13 @@ options.input= fullfile(options.input,'ucflimited');
 diary on;
 options.no_class = 10;
 options.demo_alias = 'ucf101_max_10Categories';
-options.apply_PCA = 1;
+options.apply_PCA = 0;
 %% PCA TYPE
 % 'fsvd' : to apply random pca with fsvd
 % 'npca' : to apply normal pca
 options.pcaType = 'npca';
 
+report_end = ['maxFeatures_NOPCA' options.pcaType];
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
 if options.no_class > 0
@@ -51,7 +53,7 @@ allConf_lib = cell(no_iterations,1);
 for run_no=1:3
     
     test_train_idx = test_train_idxs{1,run_no};
-    test_train_idx = (test_train_idx(find(test_train_idx(:,1)>0),:));
+    test_train_idx = (test_train_idx((test_train_idx(:,1)>0),:));
     % Main body of method
     apply_train_test_max;
     

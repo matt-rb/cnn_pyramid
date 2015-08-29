@@ -11,9 +11,9 @@ disp('Setting Up...');
 diary on;
 
 %% Expriment Exclusive Setup
-options.overlap = 10;
+options.overlap = 1;
 options.trackletlength = 20;
-options.numClusters =4000;
+options.numClusters =5000;
 % options.mode param for ComputeFeaturesForPca
 % to compute CNN descriptor use 'cnn'
 % to compute FTT descriptor use 'ftt'
@@ -23,7 +23,7 @@ options.mode = 'cnn';
 % to compute max CNN-pyramid descriptor use 'max'
 % to compute mean CNN-pyramid descriptor use 'avg'
 % to compute sum CNN-pyramid descriptor use 'sum'
-options.pyramidType = 'avg';
+options.pyramidType = 'sum';
 options.demo_alias = 'ucf101_selected_10Categories';
 options.no_class = 10; % number of selected categories ('0' for select all)
 % Set the root directory of video-feature mat files

@@ -9,7 +9,7 @@ diary on;
 %% Expriment Exclusive Setup
 options.overlap = 1;
 options.trackletlength = 20;
-options.numClusters =1000;
+options.numClusters =10000;
 % options.mode param for ComputeFeaturesForPca
 % to compute CNN descriptor use 'cnn'
 % to compute FTT descriptor use 'ftt'
