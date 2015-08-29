@@ -2,14 +2,17 @@
 %% --Setting Configs
 clear all;
 clc;
+option_all;
+if exist (fullfile(options.output,options.run_name),'dir')
+    rmdir(fullfile(options.output,options.run_name),'s');
+end
 
 disp('Setting Up...');
-option_all;
 diary on;
-
+report_end = 'cnn_max_fsvd';
 %% Expriment Exclusive Setup
-options.overlap = 10;
-options.numClusters =1000;
+options.overlap = 19;
+options.numClusters =4000;
 % options.mode param for ComputeFeaturesForPca
 % to compute CNN descriptor use 'cnn'
 % to compute FTT descriptor use 'ftt'
@@ -17,7 +20,7 @@ options.mode = 'cnn';
 % options.pyramidType param for ComputeFeaturesForPca
 % to compute subtracted CNN-pyramid descriptor use 'sub'
 % to compute max CNN-pyramid descriptor use 'max'
-options.pyramidType = 'sub';
+options.pyramidType = 'max';
 options.demo_alias = 'ucf101_selected_10Categories';
 options.no_class = 10; % number of selected categories ('0' for select all)
 % Set the root directory of video-feature mat files
@@ -25,7 +28,7 @@ options.input= fullfile(options.input,'ucflimited');
 % options.pcaType for applying PCA
 % 'fsvd' : to apply random pca with fsvd
 % 'npca' : to apply normal pca
-options.pcaType = 'npca';
+options.pcaType = 'fsvd';
 
 disp('Load Data ...');
 load(options.ucfClassIndexFile);
@@ -37,8 +40,10 @@ end
 % Read mat feature files and convert to standard input cell format
 % and Make the index of imported video features to "Dataall"
 disp('Import/Convert Data ...');
+tic;
 [ Dataall, indexDataall ] = Ucf101Import( options.input, classInd );
-
+ff = toc;
+fprintf('Import/Convert Data done in %f min\n',ff/60);
 %% --Indexing Test/Train Samples
 % Index matrix of test and train samples in following order:
 % [category_idx, sample_idx_in_Category, test(1)/train(0)]
@@ -66,7 +71,7 @@ for run_no=1:no_iterations
     
     disp('Sampling PCA...');
     test_train_idx = test_train_idxs{1,run_no};
-    test_train_idx = (test_train_idx(find(test_train_idx(:,1)>0),:));
+    test_train_idx = (test_train_idx((test_train_idx(:,1)>0),:));
     [pca_sample] = PcaSampleData(Dataall,test_train_idx,options);
     [v_pca] = PcaData_sample(pca_sample,options);
     ff = toc;

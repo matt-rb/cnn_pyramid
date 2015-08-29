@@ -4,7 +4,7 @@ addpath('method');
 addpath('evaluation');
 
 %% ------- DIRECTORY SETUP
-options.run_name = '\17-06-2015\';
+options.run_name = '17-06-2015';
 options.working_path = fullfile('..','data');
 options.input= fullfile('..','data','input');
 options.output= fullfile('..','data','output');
@@ -52,3 +52,5 @@ options.youtubeInput = fullfile('..','data','youtube');
 % Annotation and Class Index files
 options.youtubeClassIndexFile = fullfile('..','data','youtube','classInd.mat');
 
+%% Report Setup
+report_end = '';

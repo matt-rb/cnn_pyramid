@@ -34,7 +34,7 @@ for categorynum =1:length(Dataall)%-------------------------extract feature for 
         %---------------------size of cell
         %         [cnn_feature_video] = CnnDescriptor_size(data,options);
         % [feature_pca] = MyPCA(cnn_feature_pyramid1',options);
-        %cnn_feature_size{categorynum,vidnum} = [size(cnn_feature_video,1),size(cnn_feature_video,2)];
+        cnn_feature_size{categorynum,vidnum} = [size(cnn_feature_video,1),size(cnn_feature_video,2)];
 
     end
     %---save(fullfile(options.output,options.run_name,['cat-[' num2str(categorynum) ']']), 'cat_feats');

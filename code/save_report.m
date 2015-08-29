@@ -1,7 +1,7 @@
 
 dir_name = strrep(datestr(now), ':', '-');
 dir_name = strrep(dir_name, ' ', '-');
-dir_name = [dir_name '-acc_' num2str(mean(accResults)) '-clusters_' num2str(options.numClusters) '-overlap_' num2str(options.overlap)];
+dir_name = [dir_name '-acc_' num2str(mean(accResults)) '-clusters_' num2str(options.numClusters) '-overlap_' num2str(options.overlap) '-' report_end];
 
 main_root = fullfile(options.report_dir,options.demo_alias, dir_name);
 if ~exist(main_root,'dir')

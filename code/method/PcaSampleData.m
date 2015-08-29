@@ -1,6 +1,5 @@
 function [pca_sample] = PcaSampleData(Dataall,test_train_idx,options)
 pca_sample = [];
-disp('PCA Sampling');
 dispstat ('','init');
 % train_idxs= test_train_idx(test_train_idx(:,3)==0,1:2);
 for categorynum =1:length(Dataall)%-------------------------extract feature for whole of dataset
