@@ -56,6 +56,11 @@ fprintf('Import/Convert Data done in %f min\n',ff/60);
 disp('Make Test/Train index ...');
 test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexDataall );
 
+
+% --Feature Extraction
+disp('Extract max Features ...');
+feats = ComputeFeatures_max(Dataall,options);
+
 %% --Feature Extraction
 disp('Extract Features and PCA sampling...');
 tic

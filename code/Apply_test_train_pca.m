@@ -17,9 +17,21 @@ tic
 ff = toc;
 fprintf('Spelitting done in %f min\n',ff/60);
 
+
+
+
 % --Visul word- create hist for train and test
 disp('Creat Histogram ...');
 [test_data,train_data,indTest,indTrain,center] = HistFeature(trainPool,testPool,indTrain1,indTest1,options);
+
+if joint_max
+    % --Splitting Test/Train Data
+    disp('Spelitting Test/Train Data ...');
+    [TestData,TrainData,~,~] = Splitting(feats,test_train_idx);
+    disp('Join max_pyramid...');
+    test_data = [TestData, test_data];
+    train_data = [TrainData, train_data];
+end
 
 % --Create Label 
 disp('Creat Test/Train Labels ...');
