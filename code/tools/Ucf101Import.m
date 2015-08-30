@@ -30,7 +30,7 @@ function [ Dataall , IndexDataall ] = Ucf101Import( features_dir, cat_index )
             IndexDataall{video_counter,1} = cat_idx;
             IndexDataall{video_counter,2} = cat_counter(cat_idx);
             IndexDataall{video_counter,3} = vid_feats_names(vid_idx).name(1:end-4);
-            IndexDataall{video_counter,3} = size(feat,1);
+            IndexDataall{video_counter,4} = size(feat,1);
             video_counter = video_counter +1;
             cat_counter(cat_idx)= cat_counter(cat_idx)+1;
          

@@ -11,9 +11,9 @@ disp('Setting Up...');
 diary on;
 
 %% Expriment Exclusive Setup
-options.overlap = 1;
-options.trackletlength = 80;
-options.numClusters =1000;
+options.overlap = 10;
+options.trackletlength =20;
+options.numClusters =4000;
 % options.mode param for ComputeFeaturesForPca
 % to compute CNN descriptor use 'cnn'
 % to compute FTT descriptor use 'ftt'
@@ -23,11 +23,13 @@ options.mode = 'cnn';
 % to compute max CNN-pyramid descriptor use 'max'
 % to compute mean CNN-pyramid descriptor use 'avg'
 % to compute sum CNN-pyramid descriptor use 'sum'
-options.pyramidType = 'sum';
+% to compute maximum over all CNN-pyramid descriptor use 'maxall'
+options.pyramidType = 'maxall';
 options.demo_alias = 'ucf101_selected_10Categories';
 options.no_class = 10; % number of selected categories ('0' for select all)
 % Set the root directory of video-feature mat files
 options.input= fullfile(options.input,'ucflimited');
+options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 % options.pcaType for applying PCA
 % 'fsvd' : to apply random pca with fsvd
 % 'npca' : to apply normal pca

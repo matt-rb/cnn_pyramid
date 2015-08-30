@@ -1,4 +1,4 @@
-%% --Setting Configs
+feats%% --Setting Configs
 clear all;
 option_all;
 disp('Setting Up...');
@@ -21,7 +21,7 @@ test_train_idxs = YoutubeMakeTestTrainIndex( options.youtubeSubjects, indexDataa
 
 % --Feature Extraction
 disp('Extract max Features ...');
-max_feature = ComputeFeatures_max(Dataall,options);
+feats = ComputeFeatures_max(Dataall,options);
 
 
 %% -- Run Spelitting/Train/Test

@@ -25,7 +25,9 @@ for frmnum =1:(options.trackletlength-options.overlap):size(data,2)
                     case 'sum'
                         cnn_feature_pyramid1= data(:,step(jj)+1) + data(:,step(jj+1)); 
                     case 'avg'
-                        cnn_feature_pyramid1= mean(data(:,(step(jj)+1):step(jj+1)),2); 
+                        cnn_feature_pyramid1= mean(data(:,(step(jj)+1):step(jj+1)),2);
+                    case 'maxall'
+                        cnn_feature_pyramid1= max(data(:,(step(jj)+1):step(jj+1))')';
                 end
 %                 cnn_feature_pyramid1= sqrt(abs((data(:,step(jj)+1) - data(:,step(jj+1)))))/(norm((data(:,step(jj)+1) - data(:,step(jj+1))),2));
                 cnn_feature_pyramid = [cnn_feature_pyramid,cnn_feature_pyramid1'];

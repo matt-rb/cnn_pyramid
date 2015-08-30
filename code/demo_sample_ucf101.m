@@ -10,6 +10,7 @@ options.mode = 'cnn';
 options.pyramidType = 'max';
 options.pcaType='npca';
 options.input= fullfile(options.input,'ucf101sample');
+options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
 classInd(4:end,:)=[];

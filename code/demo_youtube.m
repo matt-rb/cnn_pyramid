@@ -5,6 +5,7 @@ disp('Setting Up...');
 % Set the root directory of video-feature mat files
 disp('Load Data ...');
 load (options.youtubeClassIndexFile);
+options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 
 %% --Import Data
 % Read mat feature files and convert to standard input cell format

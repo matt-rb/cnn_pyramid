@@ -24,6 +24,7 @@ options.demo_alias = 'ucf101_selected_10Categories';
 options.no_class = 10; % number of selected categories ('0' for select all)
 % Set the root directory of video-feature mat files
 options.input= fullfile(options.input,'ucflimited');
+options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 % options.pcaType for applying PCA
 % 'fsvd' : to apply random pca with fsvd
 % 'npca' : to apply normal pca

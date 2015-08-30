@@ -2,7 +2,7 @@
 
 % --Splitting Test/Train Data
 disp('Spelitting Test/Train Data ...');
-[TestData,TrainData,indTest1,indTrain1] = Splitting(max_feature,test_train_idx);
+[TestData,TrainData,indTest1,indTrain1] = Splitting(feats,test_train_idx);
 
 % --PCA
 if options.apply_PCA        

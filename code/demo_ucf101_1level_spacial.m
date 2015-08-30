@@ -7,12 +7,13 @@ disp('Setting Up...');
 % Set the root directory of video-feature mat files
 option_all;
 options.input= fullfile(options.input,'ucflimited');
+options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 diary on;
 options.no_class = 10;
 options.demo_alias = 'ucf101_spacial_10Categories';
 options.apply_PCA = 0;
-options.rdim = 128;
-options.numClusters = 4000;
+options.rdim = 200;
+options.numClusters = 1000;
 %% PCA TYPE
 % 'fsvd' : to apply random pca with fsvd
 % 'npca' : to apply normal pca
@@ -46,7 +47,7 @@ fprintf('Make Test/Train index done in %f min\n',ff/60);
 %% -- Compute Spacial Feature
 dispstat('Compute Spacial Feature...');
 tic;
-[ max_feature, index_feats ] = ComputeSpacialFeature( Dataall, indexDataall, options );
+[ feats ] = ComputeSpacialFeature( Dataall, indexDataall, options );
 ff = toc;
 fprintf('Compute Spacial Feature done in %f min\n',ff/60);
 

@@ -10,6 +10,7 @@ disp('Setting Up...');
 % Set the root directory of video-feature mat files
 % options.input= fullfile(options.input,'ucf101');
 options.input= fullfile(options.input,'UCF4CatsVgg');
+options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 disp('Load Data ...');
 load (options.ucfClassIndexFile);
 
@@ -27,7 +28,7 @@ test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexData
 
 % --Feature Extraction
 % disp('Extract CNN Features ...');
-[max_feature] = ComputeFeatures_max(Dataall,options);
+[feats] = ComputeFeatures_max(Dataall,options);
 
 %% --output results setup
 no_iterations = 3;

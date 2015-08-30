@@ -7,6 +7,7 @@ disp('Setting Up...');
 % Set the root directory of video-feature mat files
 option_all;
 options.input= fullfile(options.input,'ucflimited');
+options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 diary on;
 options.no_class = 10;
 options.demo_alias = 'ucf101_max_10Categories';
@@ -37,7 +38,7 @@ test_train_idxs = Ucf101MakeTestTrainIndex( options.ucfAnnotationFile, indexData
 
 % --Feature Extraction
 disp('Extract max Features ...');
-max_feature = ComputeFeatures_max(Dataall,options);
+feats = ComputeFeatures_max(Dataall,options);
 
 %% --output results setup
 no_iterations = 3;
