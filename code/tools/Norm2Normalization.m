@@ -4,6 +4,10 @@ M=mean(data_train);
 X_train=bsxfun(@minus,data_train,M);
 NX_train=bsxfun(@rdivide,X_train, sqrt(sum(X_train.^2,2)));
 
-X_test=bsxfun(@minus,data_test,M);
-NX_test=bsxfun(@rdivide,X_test, sqrt(sum(X_test.^2,2)));
+if exist('data_test', 'var')
+    X_test=bsxfun(@minus,data_test,M);
+    NX_test=bsxfun(@rdivide,X_test, sqrt(sum(X_test.^2,2)));
+else
+    NX_test =[];
+end
 

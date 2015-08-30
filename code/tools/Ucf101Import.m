@@ -15,7 +15,7 @@ function [ Dataall , IndexDataall ] = Ucf101Import( features_dir, cat_index )
 
     vid_feats_names=dir(features_dir);
     Dataall=cell(1,size(cat_index,1));
-    IndexDataall=cell(1,3);
+    IndexDataall=cell(1,4);
     %Dataall = cell(1,size(cat_index,1));
     cat_counter = ones(size(cat_index,1),1);
     video_counter = 1;
@@ -29,7 +29,8 @@ function [ Dataall , IndexDataall ] = Ucf101Import( features_dir, cat_index )
             Dataall{1,cat_idx}= [Dataall{1,cat_idx} ; {feat'}];
             IndexDataall{video_counter,1} = cat_idx;
             IndexDataall{video_counter,2} = cat_counter(cat_idx);
-            IndexDataall{video_counter,3} = [vid_feats_names(vid_idx).name(1:end-4)];
+            IndexDataall{video_counter,3} = vid_feats_names(vid_idx).name(1:end-4);
+            IndexDataall{video_counter,3} = size(feat,1);
             video_counter = video_counter +1;
             cat_counter(cat_idx)= cat_counter(cat_idx)+1;
          
