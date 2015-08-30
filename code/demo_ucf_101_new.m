@@ -11,9 +11,9 @@ disp('Setting Up...');
 diary on;
 
 %% Expriment Exclusive Setup
-options.overlap = 10;
-options.trackletlength =20;
-options.numClusters =4000;
+options.overlap = 1;
+options.trackletlength =16;
+options.numClusters =2000;
 % options.mode param for ComputeFeaturesForPca
 % to compute CNN descriptor use 'cnn'
 % to compute FTT descriptor use 'ftt'
@@ -33,7 +33,7 @@ options.output= fullfile(options.output,strrep(datestr(now), ':', '-'));
 % options.pcaType for applying PCA
 % 'fsvd' : to apply random pca with fsvd
 % 'npca' : to apply normal pca
-options.pcaType = 'fsvd';
+options.pcaType = 'npca';
 
 report_end = [options.mode '_' options.pyramidType '_' options.pcaType];
 disp('Load Data ...');
