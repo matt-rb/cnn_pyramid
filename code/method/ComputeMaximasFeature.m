@@ -10,13 +10,8 @@ all_video_no = length(indexDataall);
 feats= cell(length(Dataall), 1);
 tic;
 for sample_idx = 1 : all_video_no
-    %feat = zeros(1,feat_dim);
     features_video = Dataall{indexDataall{sample_idx,1}}{indexDataall{sample_idx,2}};
-    feat = comp_feats2(features_video, options.maxima_npeaks, options);
-    %for dim_no = 1: options.legcnn
-    %    tt = get_n_peaks(features_video(dim_no,:), options.maxima_npeaks);
-    %    feat(((dim_no-1)*options.maxima_npeaks)+1:options.maxima_npeaks*dim_no) = tt;
-    %end
+    feat = comp_feats_old(features_video, options.maxima_npeaks, options);
     feats{indexDataall{sample_idx,1},indexDataall{sample_idx,2}} = feat;
     dispstat (['Compute Maxima-feature for cat [' num2str(indexDataall{sample_idx,1}) '] video [' num2str(indexDataall{sample_idx,2}) ']']);
 end
@@ -24,7 +19,7 @@ disp (num2str(toc));
 
 end
 
-function feat = comp_feats(features_video, n_peaks, options)
+function feat = comp_feats_old(features_video, n_peaks, options)
 feat_dim = options.legcnn * options.maxima_npeaks;
 feat = zeros(1,feat_dim);
 for dim_no = 1: options.legcnn
@@ -51,19 +46,18 @@ function feats_filtered = apply_gaussian (features_video)
     feats_filtered = conv2 (features_video, gaussFilter, 'same');
 end
 
-function feats = comp_feats2(feats_vector, n_peaks, options)
+function feat = comp_feats(feats_vector, n_peaks, options)
+    % features_video N x dim
+    feats_filtered = apply_gaussian (feats_vector);
+    regmax = imregionalmax(feats_filtered);
+    tt = regmax.*feats_vector;
+    [val,ind]=sort(tt,2,'descend');
+    val = val(:,1:n_peaks);
+    ind = ind(:,1:n_peaks);
+    [val_s, ind_s] = sort(ind,2);
 
-% features_video N x dim
-feats_filtered = apply_gaussian (feats_vector);
-regmax = imregionalmax(feats_filtered);
-tt = regmax.*feats_vector;
-[val,ind]=sort(tt,2,'descend');
-val = val(:,1:3);
-ind_selected = ind(:,1:3);
-[val_s, ind_s] = sort(ind_selected,2);
-
-for i=1: size(feats_vector,1)
-   val_s(i,:)= val(i, ind_s(i,:));
-end
-feats = reshape(val_s',1,4096*3);
+    for i=1: size(feats_vector,1)
+        val_s(i,:)= val(i, ind_s(i,:));
+    end
+    feat = reshape(val_s',1,options.legcnn*n_peaks);
 end
