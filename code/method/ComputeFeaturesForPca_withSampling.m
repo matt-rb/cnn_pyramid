@@ -33,7 +33,7 @@ for categorynum =1:length(Dataall)%-------------------------extract feature for 
         %         [cnn_feature_video] = CnnDescriptor_size(data,options);
         % [feature_pca] = MyPCA(cnn_feature_pyramid1',options);
         cnn_feature_size{categorynum,vidnum} = [size(cnn_feature_video,1),size(cnn_feature_video,2)];
-        for i=1:3
+        for i=1:length(test_train_idxs)
             pca_sample= get_pca_sample( test_train_idxs{i}, cnn_feature_video, categorynum,vidnum,10);%options.overlap);
             if size(pca_sample,2)>0
                 pca_sample_all{i} = [pca_sample_all{i}; pca_sample];

@@ -15,8 +15,10 @@ function [ Dataall , IndexDataall ] = KthImport( features_dir, cat_index )
     Dataall=cell(1,3);
     IndexDataall=cell(1,3);
     video_counter = 1;
+    dispstat ('','init');
     for cat_no=1 : size(cat_index,1)
         load(fullfile(features_dir,['kth_feats_' cat_index{cat_no,2} '.mat']));
+        dispstat (['Import sample cat: ['  num2str(cat_no) ']']);
         Dataall{1,cat_no}=all_feats;
         for video_idx=1 : length(all_feats)
             IndexDataall{video_counter,1} = cat_no;
